@@ -196,11 +196,11 @@ if is_setup_puppet_server; then
     echo -n "Current Puppet server is "
     echo $(get_puppet_server) | colorize_highlight
     echo "Do you want to change Puppet server [y/n]?" | colorize_question 1>&2
-    if prompt_yes; then
-        change_puppet_server
-    fi
 else
-    echo "Puppet server does not setup"
+    echo "Puppet server is not setup"
+    echo "Do you want to setup Puppet server [y/n]?" | colorize_question 1>&2
+fi
+if prompt_yes; then
     change_puppet_server
 fi
 echo
