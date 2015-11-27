@@ -70,7 +70,7 @@ function prompt_yes() {
 #set constants
 declare -r CONFIG_SELINUX='/etc/selinux/config'
 declare -r CONFIG_NETWORK='/etc/sysconfig/network'
-declare -r CONFIG_PUPPET='/etc/puppet/puppet.conf'
+declare -r CONFIG_PUPPET='/etc/puppetlabs/puppet/puppet.conf'
 
 #detect Centos major version and setup right Puppet Labs repository
 declare -r CENTOS_MAJOR_VERSION=$(/bin/rpm -q --queryformat '%{VERSION}' centos-release)
@@ -86,7 +86,6 @@ case $CENTOS_MAJOR_VERSION in
         exit 1
         ;;
 esac
-
 
 #check if running as root
 if [ "$EUID" -ne 0 ]; then 
