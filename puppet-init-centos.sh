@@ -76,10 +76,10 @@ declare -r CONFIG_PUPPET='/etc/puppet/puppet.conf'
 declare -r CENTOS_MAJOR_VERSION=$(/bin/rpm -q --queryformat '%{VERSION}' centos-release)
 case $CENTOS_MAJOR_VERSION in
     6)
-        declare -r PUPPET_REPO_URL='https://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm'
+        declare -r PUPPET_REPO_URL='https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm'
         ;;
     7)
-        declare -r PUPPET_REPO_URL='https://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm'
+        declare -r PUPPET_REPO_URL='https://yum.puppetlabs.com/puppetlabs-release-pc1-el-7.noarch.rpm'
         ;;
     *)
         echo "This script provides support only for Centos major version 6 and 7." | colorize_err
