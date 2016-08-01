@@ -210,8 +210,16 @@ echo
 
 #run puppet agent asu service
 function activate_puppet_service() {
-    /sbin/chkconfig puppet on
-    /etc/init.d/puppet restart
+    case $CENTOS_MAJOR_VERSION in
+        6)
+            /sbin/chkconfig puppet on
+            /etc/init.d/puppet restart
+            ;;
+        7)
+            /usr/bin/systemctl enable puppet.service
+            /usr/bin/systemctl start puppet.service
+            ;;
+    esac
 }
 
 echo "Do you want to activate Puppet agent service [y/n]?" | colorize_question 1>&2
@@ -221,12 +229,19 @@ fi
 echo
 
 #manually run puppat agent
-function run_puppet_agent_now() {
-    /usr/bin/puppet agent --test
+function run_puppet_agent_test_now() {
+    case $CENTOS_MAJOR_VERSION in
+        6)
+            /usr/bin/puppet agent --test
+            ;;
+        7)
+            /opt/puppetlabs/bin/puppet agent --test
+            ;;
+    esac
 }
 
-echo "Do you want to run Puppet agent now [y/n]?" | colorize_question 1>&2
+echo "Do you want to run Puppet agent test now [y/n]?" | colorize_question 1>&2
 if prompt_yes; then
-    run_puppet_agent_now
+    run_puppet_agent_test_now
 fi
 echo
